@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<link rel="stylesheet" type="text/css" href="/static/css/style.css">
+<title>Doctor Dashboard</title>
+
+<style>
+  .link {
+    text-decoration: none;
+    color: white;
+  }
+  
+  .link:hover {
+    background-color: wheat;
+    color: black;
+  }
+</style>
+
+<!--usr dashbrd header started-->
+
+<div class="row" id="header">
+    <div class="col-md-12">
+        <div class="col-md-4"  style="display: inline-block;">
+            <h3> doctor details </h3>
+            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+            <h4><b>Name:</b>  {{ user.username }}</h4>
+            <h4>First Name: {{ user.first_name }}</h4>
+           <h4>Last Name: {{ user.last_name }}</h4>
+           <h4>Email : {{ user.email }}</h4>
+
+        </div>
+        <div class="col-md-6" style="display: inline-block; text-align: right;">
+          <span style="margin-left: 25px;"> </span>
+          
+      </div>
+    </div>
+    
+</div>
+<a href="/">Logout</a>
+</div>
+
+
+
+
+{% endblock body %}
