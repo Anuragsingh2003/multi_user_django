@@ -75,10 +75,20 @@ WSGI_APPLICATION = 'atcproject.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'usersdetails',
+        'USER': 'root',
+        'PASSWORD': 'Anurag@123',
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -114,14 +124,18 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-
 STATIC_URL = 'static/'
+
+#Added Manually
+#very cearful about speeling i.g= only use 'static' every wheere if folder name if static and not use 'statics'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR,"static"),
+]
 
 #User Changes
 MEDIA_URL = '/media/'
 
-MEDIA_ROOT=os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT=os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

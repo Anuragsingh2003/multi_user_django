@@ -2,7 +2,7 @@
 
 {% block body %}
 <link rel="stylesheet" type="text/css" href="/static/css/style.css">
-<title>Doctor Dashboard</title>
+<title>Patient Dashboard</title>
 
 <style>
   .link {
@@ -17,7 +17,7 @@
 </style>
 
 <!--usr dashbrd header started-->
-
+{% csrf_token %}
 <div class="row" id="header">
     <div class="col-md-12">
         <div class="col-md-4"  style="display: inline-block;">
@@ -36,7 +36,7 @@
     </div>
     
 </div>
-<a href="/">Logout</a>
+<a href="/logt/">Logout</a>
 </div>
 
 

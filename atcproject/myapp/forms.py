@@ -90,10 +90,22 @@ class RegistrationForm(UserCreationForm):
             }
         )
     )
+    is_patient = forms.BooleanField(required=False)
+    is_doctor = forms.BooleanField( required=False)
 
     class Meta:
         model = User
         fields = ('first_name', 'profile_picture', 'last_name', 'username', 'email', 'password1', 'password2','is_patient','is_doctor','state', 'city', 'pincode')
+
+    def clean(self):
+        cleaned_data = super().clean()
+        is_patient = cleaned_data.get('is_patient')
+        is_doctor = cleaned_data.get('is_doctor')
+
+        if not is_doctor and not is_patient:
+            raise forms.ValidationError('You must select at least one checkbox.')
+
+        return cleaned_data
 
     def save(self, commit=True):
         user = super(RegistrationForm, self).save(commit=False)
