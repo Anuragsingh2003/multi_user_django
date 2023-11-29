@@ -1,0 +1,97 @@
+<!-- create_blog_post.html -->
+{% extends 'base.html' %}
+
+{% block head %}
+  <style>
+    body {
+
+        background: url('../static/mypics/DSA.jpg') center/cover no-repeat fixed;
+        margin: 0;
+        padding: 0;
+        color: #fff;
+        background-size: cover; 
+        
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input, textarea {
+      padding: 8px;
+      margin-bottom: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    button {
+      background-color: #3498db;
+      color: #fff;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+
+  </style>
+{% endblock %}
+
+{% block body %}
+  <div class="container">
+    <h4><b>Username:</b>  {{ user.username }}</h4>
+
+    <h2>Create Blog Post</h2>
+    <center><h4 style="color:red;">----Doctor's Section----</h4></center>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <label for="{{ form.title.id_for_label }}">Title:</label>
+      {{ form.title }}
+      
+      <label for="{{ form.image.id_for_label }}">Image:</label>
+      {{ form.image }}
+      
+      <label for="{{ form.category.id_for_label }}">Category:</label>
+      {{ form.category }}
+      
+      <label for="{{ form.summary.id_for_label }}">Summary:</label>
+      {{ form.summary }}
+      
+      <label for="{{ form.content.id_for_label }}">Content:</label>
+      {{ form.content }}
+      
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+{% endblock %}

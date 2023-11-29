@@ -5,41 +5,89 @@
 <title>Doctor Dashboard</title>
 
 <style>
+  /* Add your custom styles here */
+
+  /* Header Styles */
+  #header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 0;
+    margin-bottom: 20px;
+  }
+
+  #header h4 {
+    margin-bottom: 10px;
+  }
+
+  /* User Details Styles */
+  .user-details {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile-picture {
+    max-width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+
+  /* Logout Button Style */
+  .logout-btn {
+    margin-top: 20px;
+  }
+
   .link {
     text-decoration: none;
     color: white;
   }
-  
+
   .link:hover {
     background-color: wheat;
     color: black;
   }
 </style>
-{% csrf_token %}
-<!--usr dashbrd header started-->
 
-<div class="row" id="header">
-    <div class="col-md-12">
-        <div class="col-md-4"  style="display: inline-block;">
-            <h3> Doctor details </h3>
-            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
-            <h4><b>Name:</b>  {{ user.username }}</h4>
-            <h4>First Name: {{ user.first_name }}</h4>
-           <h4>Last Name: {{ user.last_name }}</h4>
-           <h4>Email : {{ user.email }}</h4>
+<!-- User Dashboard Header -->
+<div class="container-fluid" id="header">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h4>----Doctor's Details----</h4>
+    </div>
+  </div>
+</div>
 
-        </div>
-        <div class="col-md-6" style="display: inline-block; text-align: right;">
-          <span style="margin-left: 25px;"> </span>
-          
+<!-- User Details Section -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="user-details">
+        <h3>Hi, @Doctor: {{ user.username }}</h3>
+        <p>See All Blog Posts: <a class="btn btn-info link" href="{% url 'view_blog_posts' %}">All Blog Posts</a></p>
+        <p>Create Blog Post: <a class="btn btn-primary link" href="/create_blog_post/">Create Blog Post</a></p>
+        <p>My Blogs Posts: <a class="btn btn-warning link" href="/my_posts/">My Blogs Posts</a></p>
+
+        <img class="profile-picture" src="{{ user.profile_picture.url }}" alt="Profile Picture">
+        <h4><b>Name:</b> {{ user.username }}</h4>
+        <h4>First Name: {{ user.first_name }}</h4>
+        <h4>Last Name: {{ user.last_name }}</h4>
+        <h4>Email: {{ user.email }}</h4>
       </div>
     </div>
-    
+
+    <div class="col-md-6 text-right">
+      <!-- Add any additional content here -->
+    </div>
+  </div>
+
+  <!-- Logout Button -->
+  <div class="row logout-btn">
+    <div class="col-md-12 text-center">
+      <a class="btn btn-danger" href="/logt/">Logout</a>
+    </div>
+  </div>
 </div>
-<a href="/">Logout</a>
-</div>
-
-
-
 
 {% endblock body %}

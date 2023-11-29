@@ -1,0 +1,104 @@
+<!-- view_blog_posts.html -->
+{% extends 'base.html' %}
+
+{% block head %}
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: yellowgreen;
+      margin: 0;
+      padding: 0;
+      background-size: cover;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    li {
+      display: inline;
+      margin-right: 10px;
+    }
+
+    a {
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+    }
+
+    .btn-warning {
+      background-color: #ffc107;
+    }
+
+    .btn-primary {
+      background-color: #007bff;
+    }
+
+    .btn-info {
+      background-color: #17a2b8;
+    }
+
+    div {
+      background-color: pink;
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      color: #007bff;
+    }
+
+    img {
+      max-width: 70%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 10px;
+      display: block; /* Center the image */
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    p {
+      color: green;
+      margin-bottom: 20px;
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <h2>All Blog Posts</h2>
+  <ul>
+    <li><a class="btn btn-danger" href="{% url 'view_blog_posts_by_category' 'Covid19' %}">Covid19</a></li>
+    <li><a class="btn btn-warning" href="{% url 'view_blog_posts_by_category' 'Heart Disease' %}">Heart</a></li>
+    <li><a class="btn btn-primary" href="{% url 'view_blog_posts_by_category' 'Mental Health' %}">Mental Health</a></li>
+    <li><a class="btn btn-info" href="{% url 'view_blog_posts_by_category' 'Immunization' %}">Immunization</a></li>
+  </ul>
+
+  {% for post in blog_posts %}
+    <div>
+      <h3><b style="color: black; font-size: larger;">Title:_</b>{{ post.title }}</h3>
+      <img src="{{ post.image.url }}" alt="{{ post.title }}" class="blog-img">
+      <p><b style="color: black; font-size: large;">Summary:</b>{{ post.summary|truncatewords:15 }}{% if post.summary|length > 15 %}...{% endif %}</p>
+      <!-- Add more details as needed -->
+    </div>
+  {% endfor %}
+{% endblock %}

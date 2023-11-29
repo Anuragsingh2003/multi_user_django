@@ -1,45 +1,102 @@
 {% extends 'base.html' %}
 
+{% block head %}
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    #header {
+      background-color: #007bff;
+      color: white;
+      padding: 20px;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+    }
+
+    h4 {
+      margin: 0;
+    }
+
+    .col-md-4 {
+      display: inline-block;
+      vertical-align: top;
+      margin: 0 10px;
+    }
+
+    .col-md-6 {
+      display: inline-block;
+      text-align: right;
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 50%;
+      margin-top: 10px;
+    }
+
+    .btn-info {
+      background-color: #17a2b8;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .btn-info:hover {
+      background-color: #138496;
+    }
+
+    .btn-danger {
+      background-color: #dc3545;
+      color: white;
+      text-decoration: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    .btn-danger:hover {
+      background-color: #c82333;
+    }
+  </style>
+{% endblock %}
+
 {% block body %}
-<link rel="stylesheet" type="text/css" href="/static/css/style.css">
-<title>Patient Dashboard</title>
+  <div id="header">
+    <center><h4>----Patient Details----</h4></center>
+  </div>
 
-<style>
-  .link {
-    text-decoration: none;
-    color: white;
-  }
-  
-  .link:hover {
-    background-color: wheat;
-    color: black;
-  }
-</style>
-
-<!--usr dashbrd header started-->
-{% csrf_token %}
-<div class="row" id="header">
+  <div class="row">
     <div class="col-md-12">
-        <div class="col-md-4"  style="display: inline-block;">
-            <h3> Patient details </h3>
-            <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
-            <h4><b>Name:</b>  {{ user.username }}</h4>
-            <h4>First Name: {{ user.first_name }}</h4>
-           <h4>Last Name: {{ user.last_name }}</h4>
-           <h4>Email : {{ user.email }}</h4>
+      <div class="col-md-4">
+        <h3>Hi, @patient: {{ user.username }} ,See All Blog Posts: <a class="btn btn-info" href="{% url 'view_blog_posts' %}">All Blog Posts</a></h3>
 
-        </div>
-        <div class="col-md-6" style="display: inline-block; text-align: right;">
-          <span style="margin-left: 25px;"> </span>
-          
+        <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
+
+        <h4><b>Name:</b>  {{ user.username }}</h4>
+        <h4>First Name: {{ user.first_name }}</h4>
+        <h4>Last Name: {{ user.last_name }}</h4>
+        <h4>Email: {{ user.email }}</h4>
+      </div>
+
+      <div class="col-md-6" style="text-align: right;">
+        <span style="margin-left: 25px;"> </span>
       </div>
     </div>
-    
-</div>
-<a href="/logt/">Logout</a>
-</div>
+  </div>
 
-
-
-
-{% endblock body %}
+  <a class="btn btn-danger" href="{% url 'logt' %}">Logout</a>
+{% endblock %}

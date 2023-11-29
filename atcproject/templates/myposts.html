@@ -1,0 +1,73 @@
+<!-- my_posts.html -->
+{% extends 'base.html' %}
+
+{% block head %}
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: #f4f4f4;  /* Set a light background color */
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;  /* Set a white background */
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;  /* Set a dark color for the header */
+    }
+
+    div {
+      background-color: rgb(250, 255, 192);  /* Set a light background color for each post */
+      margin: 10px 0;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h3 {
+      color: #0066cc;  /* Set a color for the post title */
+    }
+
+    h1 {
+      color: #009933;  /* Set a color for the category */
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+
+    h5 {
+      color: #666;  /* Set a color for the summary text */
+    }
+
+    h4 {
+      color: #ff6600;  /* Set a color for the author name */
+    }
+  </style>
+{% endblock %}
+
+{% block body %}
+  <center><h2>-----My Blog Posts----</h2></center>
+  
+  {% for post in user_posts %}
+    <div>
+      <h3><b>Title:</b>{{ post.title }}</h3>
+      <h1><b>Category:</b>{{ post.category }}</h1>
+      <img src="{{ post.image.url }}" alt="{{ post.title }}">
+      <h5><b>Summary:</b><p>{{ post.summary }}</p></h5>
+      <h4><b>Author:</b>{{ user.username }}</h4>
+      <!-- Add more details as needed -->
+    </div>
+  {% endfor %}
+{% endblock %}
