@@ -2,8 +2,15 @@ from django.shortcuts import render, redirect
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import authenticate, login,logout
 from .models import User
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
+from django.shortcuts import render, redirect
+from .forms import RegistrationForm, LoginForm
+from django.contrib.auth import authenticate, login
+from django.shortcuts import render, redirect
+from .models import BlogCategory, BlogPost
+from .forms import BlogPostForm
+from django.shortcuts import render, get_object_or_404
+from .models import BlogPost, BlogCategory
 
 
 def index(request):
@@ -53,26 +60,6 @@ def patient(request):
     return render(request, 'patient/patient.html', {'user': request.user})
 
 
-def patient_login(request):
-    form = LoginForm(request.POST or None)
-    msg = None
-    if request.method == 'POST':
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None and user.is_doctor:
-                login(request, user)
-                return redirect('doctor')
-            elif user is not None and user.is_patient: 
-                login(request, user)
-                request.session['username'] = username  # create session
-                return redirect('patient')
-            else:
-                msg= 'invalid credentials'
-        else:
-            msg = 'error validating form'
-    return render(request, 'patient_login.html', {'form': form, 'msg': msg})
 
 
 def patient_login(request):
@@ -119,17 +106,7 @@ def logt(request):
     return redirect('index')
 
 
-from django.shortcuts import render, redirect
-from .forms import RegistrationForm, LoginForm
-from django.contrib.auth import authenticate, login
-from .models import User
 
-
-# views.py
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
-from .models import BlogCategory, BlogPost
-from .forms import BlogPostForm
 
 def create_blog_post(request):
     if request.method == 'POST':
@@ -156,11 +133,9 @@ def my_posts(request):
     else:
         return redirect(doctor_login)
 
-# views.py
-# views.py
-from django.shortcuts import render, get_object_or_404
-from .models import BlogPost, BlogCategory
-from django.http import JsonResponse
+
+
+
 
 
 def view_blog_posts(request, category_name=None):

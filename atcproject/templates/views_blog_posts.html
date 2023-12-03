@@ -87,6 +87,7 @@
 {% block body %}
   <h2>All Blog Posts</h2>
   <ul>
+    {% comment %} sending or calling func in view with giving values under it {% endcomment %}
     <li><a class="btn btn-danger" href="{% url 'view_blog_posts_by_category' 'Covid19' %}">Covid19</a></li>
     <li><a class="btn btn-warning" href="{% url 'view_blog_posts_by_category' 'Heart Disease' %}">Heart</a></li>
     <li><a class="btn btn-primary" href="{% url 'view_blog_posts_by_category' 'Mental Health' %}">Mental Health</a></li>
