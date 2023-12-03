@@ -53,27 +53,6 @@ def patient(request):
     return render(request, 'patient/patient.html', {'user': request.user})
 
 
-def patient_login(request):
-    form = LoginForm(request.POST or None)
-    msg = None
-    if request.method == 'POST':
-        if form.is_valid():
-            username = form.cleaned_data.get('username')
-            password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
-            if user is not None and user.is_doctor:
-                login(request, user)
-                return redirect('doctor')
-            elif user is not None and user.is_patient: 
-                login(request, user)
-                request.session['username'] = username  # create session
-                return redirect('patient')
-            else:
-                msg= 'invalid credentials'
-        else:
-            msg = 'error validating form'
-    return render(request, 'patient_login.html', {'form': form, 'msg': msg})
-
 
 def patient_login(request):
     form = LoginForm(request.POST or None)
