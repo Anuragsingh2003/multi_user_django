@@ -61,7 +61,6 @@ def patient(request):
 
 
 
-
 def patient_login(request):
     form = LoginForm(request.POST or None)
     msg = None
